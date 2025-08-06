@@ -232,7 +232,7 @@ function Header() {
       {/* City Logo visible on all screen sizes */}
       <div className="flex items-center">
         <a className="block h-11 w-11 rounded-full overflow-hidden">
-          <img src="../src/assets/images/addisababa_police_logo.png" alt="Addis Ababa Logo" />
+          <img src="../src/assets/images/addis_abab_logo.jpg" alt="Addis Ababa Logo" />
         </a>
       </div>
 
