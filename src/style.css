@@ -7,8 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-100: oklch(93.6% 0.032 17.717);
-    --color-amber-200: oklch(92.4% 0.12 95.746);
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
@@ -336,6 +334,12 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-50 {
+    height: calc(var(--spacing) * 50);
+  }
+  .h-100 {
+    height: calc(var(--spacing) * 100);
+  }
   .h-auto {
     height: auto;
   }
@@ -347,6 +351,12 @@
   }
   .max-h-\[50vh\] {
     max-height: 50vh;
+  }
+  .min-h-100 {
+    min-height: calc(var(--spacing) * 100);
+  }
+  .min-h-200 {
+    min-height: calc(var(--spacing) * 200);
   }
   .min-h-\[16rem\] {
     min-height: 16rem;
@@ -536,15 +546,6 @@
     }
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
-  .bg-\[url\(\'\.\.\/src\/assets\/images\/amendment_logo\.png\'\)\] {
-    background-image: url('../src/assets/images/amendment_logo.png');
-  }
-  .bg-\[url\(\'\.\.\/src\/assets\/images\/property_logo\.png\'\)\] {
-    background-image: url('../src/assets/images/property_logo.png');
-  }
-  .bg-\[url\(\'\.\.\/src\/assets\/transportation_logo\.png\'\)\] {
-    background-image: url('../src/assets/transportation_logo.png');
-  }
   .bg-\[url\(\'https\:\/\/placehold\.co\/32x32\/3b82f6\/white\?text\=E\'\)\] {
     background-image: url('https://placehold.co/32x32/3b82f6/white?text=E');
   }
@@ -575,15 +576,6 @@
   .bg-\[url\(\'https\:\/\/placehold\.co\/32x32\/3b82f6\/white\?text\=Y\'\)\] {
     background-image: url('https://placehold.co/32x32/3b82f6/white?text=Y');
   }
-  .bg-\[url\(\'https\:\/\/placehold\.co\/64x64\/000000\/white\?text\=F\'\)\] {
-    background-image: url('https://placehold.co/64x64/000000/white?text=F');
-  }
-  .bg-\[url\(\'https\:\/\/placehold\.co\/64x64\/000000\/white\?text\=P\'\)\] {
-    background-image: url('https://placehold.co/64x64/000000/white?text=P');
-  }
-  .bg-\[url\(\'https\:\/\/placehold\.co\/64x64\/000000\/white\?text\=T\'\)\] {
-    background-image: url('https://placehold.co/64x64/000000/white?text=T');
-  }
   .from-\[\#a6a6a6\]\/20 {
     --tw-gradient-from: color-mix(in oklab, #a6a6a6 20%, transparent);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -594,9 +586,6 @@
   }
   .bg-cover {
     background-size: cover;
-  }
-  .bg-center {
-    background-position: center;
   }
   .object-cover {
     object-fit: cover;
@@ -769,6 +758,13 @@
       }
     }
   }
+  .hover\:min-h-screen {
+    &:hover {
+      @media (hover: hover) {
+        min-height: 100vh;
+      }
+    }
+  }
   .hover\:scale-105 {
     &:hover {
       @media (hover: hover) {
@@ -833,6 +829,11 @@
     &:focus {
       --tw-outline-style: none;
       outline-style: none;
+    }
+  }
+  .sm\:w-screen {
+    @media (width >= 40rem) {
+      width: 100vw;
     }
   }
   .md\:my-8 {

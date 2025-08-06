@@ -232,7 +232,7 @@ function Header() {
       {/* City Logo visible on all screen sizes */}
       <div className="flex items-center">
         <a className="block h-11 w-11 rounded-full overflow-hidden">
-          <img src="https://placehold.co/44x44/37393A/white?text=Logo" alt="Addis Ababa Logo" />
+          <img src="../src/assets/images/addisababa_police_logo.png" alt="Addis Ababa Logo" />
         </a>
       </div>
 
@@ -561,7 +561,7 @@ function Main() {
             <p className="text-white text-sm md:text-base text-justify mt-2">Adanech Abebe is the current mayor of Addis Ababa, making history as the first woman to hold the position. She was appointed in 2020 and has since focused on urban development and improving public services. Before becoming mayor, she served as Ethiopia’s Minister of Revenue. Adanech is known for her leadership in reforming tax systems and combating corruption. As mayor, she has worked on infrastructure projects and housing programs for low-income residents. Her role highlights the increasing presence of women in Ethiopian politics and leadership.</p>
           </div>
         </div>
-        <div className="w-200 bg-white rounded-xl shadow-lg flex flex-col gap-4 p-4 md:p-8 justify-start">
+        <div className="w-200 bg-white rounded-xl shadow-lg flex flex-col gap-4 p-4 sm:w-screen md:p-8 justify-start">
           <h2 className="text-center font-bold text-2xl">About Addis</h2>
           <p className="flex-wrap text-sm md:text-lg mb-20">Addis Ababa is the capital city of Ethiopia and one of the highest capitals in the world, sitting at about 2,355 meters above sea level. It was founded in 1886 by Emperor Menelik II and means "new flower" in Amharic. The city serves as the political, cultural, and economic center of the country. It is home to the African Union headquarters and numerous international organizations. Addis Ababa is known for its diverse population, vibrant markets, and historic landmarks like the National Museum and Holy Trinity Cathedral. Despite rapid development, the city still preserves elements of its rich cultural heritage.</p>
           <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
@@ -584,7 +584,7 @@ function Main() {
         </div>
 
       </div>
-      <div className="hover:min-h-screen h-50 snap-start w-screen p-4 md:p-8">
+      <div className="h-auto snap-start w-screen p-4 md:p-8">
         <div className="container mx-auto">
           <h1 className="text-center my-4 md:my-8 text-2xl md:text-3xl">City Services & Information </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 w-full mx-auto">
@@ -644,11 +644,10 @@ function Main() {
           </section>
         </article>
       </div>
-      <div className="min-h-screen snap-start p-4 md:p-8 flex flex-col items-center">
-        <h1 className="text-center my-4 md:my-8 text-2xl md:text-3xl">Public Safety & Emergency Services</h1>
+      <div className="min-h-100 snap-start p-4 md:p-8 flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 w-full">
           <div className="p-4 md:p-8 rounded-2xl flex flex-col border border-black shadow-lg">
-            <div className="w-16 h-16 bg-[url('https://placehold.co/64x64/000000/white?text=P')] bg-cover bg-center mb-4 md:mb-8"></div>
+            <img className='w-16 h-16 mb-4 md:mb-8' src="../src/assets/images/addisababa_police_logo.png" />
             <h2 className="text-xl font-bold text-center">Public Safety & Emergency Services</h2>
             <p className="text-sm md:text-md font-medium text-justify mt-2"> Report criminal activities and hazardous situations to local authorities through our secure reporting system. You can call them through:</p>
             <ul className="list-disc list-inside text-sm mt-2">
@@ -657,7 +656,7 @@ function Main() {
             </ul>
           </div>
           <div className="p-4 md:p-8 rounded-2xl flex flex-col border border-black shadow-lg">
-            <div className="w-16 h-16 bg-[url('https://placehold.co/64x64/000000/white?text=F')] bg-cover bg-center mb-4 md:mb-8"></div>
+            <img className='w-16 h-16 mb-4 md:mb-8' src="../src/assets/images/addis_ababa_fire_station_logo.png" />
             <h2 className="text-xl font-bold text-center">Fire & Rescue Services</h2>
             <p className="text-sm md:text-md font-medium text-start mt-2">Access fire department services, report hazardous conditions, and get emergency assistance information.</p>
             <ul className="list-disc list-inside text-sm mt-2">
@@ -666,7 +665,7 @@ function Main() {
             </ul>
           </div>
           <div className="p-4 md:p-8 rounded-2xl flex flex-col border border-black shadow-lg">
-            <div className="w-16 h-16 bg-[url('https://placehold.co/64x64/000000/white?text=T')] bg-cover bg-center mb-4 md:mb-8"></div>
+            <img className='w-16 h-16 mb-4 md:mb-8' src="../src/assets/images/traffic_bureau.png" />
             <h2 className="text-xl font-bold text-center">Traffic & Road Incidents</h2>
             <p className="text-sm md:text-md font-medium text-justify mt-2">Report traffic accidents, road hazards, and access real-time traffic incident updates and alerts.</p>
             <ul className="list-disc list-inside text-sm mt-2">
