@@ -19,6 +19,8 @@ const CardWithHoverDescription = ({ title, description, image, listItems }) => {
       className="p-4 md:p-8 border border-black rounded-xl flex flex-col justify-start transition-transform duration-300 ease-in-out hover:scale-105"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(true)}
     >
       <div
         className="h-12 w-12 bg-cover"
@@ -146,7 +148,7 @@ const visitorData = [
 
 function Charts() {
   return (
-    <div className="min-h-screen snap-start bg-gray-100 p-4 md:p-8">
+    <div className="min-h-screen min-w-screen snap-start bg-gray-100 p-4 md:p-8">
       <div className="container mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6 md:mb-10">Addis Ababa City Stats</h1>
 
@@ -228,10 +230,10 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center h-16 w-screen bg-[#37393A] p-4 md:p-6 opacity-100">
+    <header className="top-0 left-0 right-0 z-20 flex justify-between items-center h-16 w-screen bg-[#37393A] p-4 md:p-6 opacity-100">
       {/* City Logo visible on all screen sizes */}
       <div className="flex items-center">
-        <a className="block h-11 w-11 rounded-full overflow-hidden">
+        <a className="fixed block  h-11 w-11 rounded-full overflow-hidden">
           <img src="../src/assets/images/addis_abab_logo.jpg" alt="Addis Ababa Logo" />
         </a>
       </div>
@@ -239,16 +241,16 @@ function Header() {
       {/* Desktop Navigation visible on medium screens and up */}
       <div className="hidden md:flex flex-grow justify-center">
         <ul className="flex flex-wrap justify-center gap-4">
-          <li className="text-white hover:text-gray-300 hover:underline">Home</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Government</li>
-          <li className="text-white hover:text-gray-300 hover:underline">News</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Service</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Programs</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Economy</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Gallery</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Resource</li>
-          <li className="text-white hover:text-gray-300 hover:underline">Contact</li>
-          <li className="relative top-1 text-white hover:text-gray-300 w-6 h-8 hidden md:block">
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Home</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Government</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">News</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Service</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Programs</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Economy</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Gallery</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Resource</li>
+          <li className="text-white hover:text-gray-300 md:text-sm hover:underline">Contact</li>
+          <li className="lg:absolute lg:right-30 text-white hover:text-gray-300 w-6 h-8 hidden md:block">
             {/* Search icon placeholder */}
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -256,35 +258,34 @@ function Header() {
           </li>
         </ul>
       </div>
-
       {/* Hamburger button visible on small screens only */}
       <button onClick={toggleMenu} className="md:hidden text-white p-2">
         {/* Hamburger icon SVG */}
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg xmlns="http://www.w3.org/2000/svg" className={`${isMenuOpen ? "hidden " : ""}h-6 w-6`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
 
       {/* Mobile menu panel */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-30 flex flex-col items-center justify-center space-y-8">
-          <button onClick={toggleMenu} className="absolute top-4 right-4 text-white p-2">
+        <div className="relative md:hidden inset-0 bg-opacity-95 z-30 items-center justify-center space-y-8">
+          <ul className="absolute rounded-b-4xl w-40 bg-[#37393A] right-0 top-12  flex flex-col h-100 items-center space-y-6 text-2xl">
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Home</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Government</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">News</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Service</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Programs</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Economy</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Gallery</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Resource</a></li>
+            <li className="text-sm text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Contact</a></li>
+          </ul>
+          <button onClick={toggleMenu} className="right-2 text-white p-2">
             {/* Close icon SVG */}
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <ul className="flex flex-col items-center space-y-6 text-2xl">
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Home</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Government</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">News</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Service</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Programs</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Economy</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Gallery</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Resource</a></li>
-            <li className="text-white hover:text-gray-300" onClick={toggleMenu}><a href="#">Contact</a></li>
-          </ul>
         </div>
       )}
     </header>
@@ -341,6 +342,7 @@ const First_page = () => {
 
   return (
     <div className="relative flex flex-col justify-center items-center px-4 md:px-16 w-screen h-screen snap-start">
+      <Header />
       {/* Container for the background images with cross-fade effect */}
       <div className="absolute top-0 left-0 w-screen h-screen -z-10">
         {image_url_list.map((src, index) => (
@@ -477,7 +479,7 @@ const CommunityEngagement = () => (
 );
 
 const UrbanInfrastructure = () => (
-  <div className="p-4 w-screen px-4 md:px-16 h-auto gap-4 md:gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  <div className=" p-4 w-screen px-4 md:px-16 h-auto gap-4 md:gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     <div className="flex flex-col shadow-md shadow-gray-200 hover:shadow-lg hover:shadow-gray-500 hover:relative hover:bottom-2 p-4 rounded-2xl border border-black ">
       <div className="flex items-center space-x-2">
         <div className="h-8 w-8 bg-[url('https://placehold.co/32x32/3b82f6/white?text=W')] bg-cover rounded-xl"></div>
@@ -550,21 +552,21 @@ function Main() {
   };
 
   return (
-    <main className="snap-y snap-mandatory h-screen overflow-y-scroll">
+    <main className="bg-[#f2f2f2]snap-y snap-mandatory h-screen overflow-x-hidden overflow-y-scroll">
       <First_page />
       <Charts />
-      <div className="min-h-screen snap-start container mx-auto flex w-screen flex-col lg:flex-row p-4 md:p-8  lg:justify-start">
-        <div className="lg:w-100 flex flex-col overflow-hidden rounded-xl shadow-lg">
+      <div className="min-h-screen snap-start container mx-auto w-screen flex flex-col lg:flex-row p-4 md:p-8  lg:justify-start ">
+        <div className="lg:w-100 flex flex-col shrink-0 overflow-hidden rounded-xl shadow-lg">
           <img className="object-cover" src="../src/assets/adanech_pic.jpg" alt="Dr Adanech Abebe" />
           <div className="bg-[#0d4d99] flex-auto max-h-[50vh] overflow-y-auto flex flex-col p-4 md:p-5">
             <h1 className="text-white text-center text-xl font-bold">Dr Adanech Abebe</h1>
             <p className="text-white text-sm md:text-base text-justify mt-2">Adanech Abebe is the current mayor of Addis Ababa, making history as the first woman to hold the position. She was appointed in 2020 and has since focused on urban development and improving public services. Before becoming mayor, she served as Ethiopia’s Minister of Revenue. Adanech is known for her leadership in reforming tax systems and combating corruption. As mayor, she has worked on infrastructure projects and housing programs for low-income residents. Her role highlights the increasing presence of women in Ethiopian politics and leadership.</p>
           </div>
         </div>
-        <div className="w-200 bg-white rounded-xl shadow-lg flex flex-col gap-4 p-4 sm:w-screen md:p-8 justify-start">
+        <div className="w-screen bg-white rounded-xl shadow-lg flex flex-col gap-4 p-4  md:p-8 justify-start">
           <h2 className="text-center font-bold text-2xl">About Addis</h2>
           <p className="flex-wrap text-sm md:text-lg mb-20">Addis Ababa is the capital city of Ethiopia and one of the highest capitals in the world, sitting at about 2,355 meters above sea level. It was founded in 1886 by Emperor Menelik II and means "new flower" in Amharic. The city serves as the political, cultural, and economic center of the country. It is home to the African Union headquarters and numerous international organizations. Addis Ababa is known for its diverse population, vibrant markets, and historic landmarks like the National Museum and Holy Trinity Cathedral. Despite rapid development, the city still preserves elements of its rich cultural heritage.</p>
-          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
+          <div className="bg-white rounded-xl hover:shadow-2xl p-4 md:p-6">
             <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-4">Population Growth (2021-2024)</h3>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={populationGrowthData}>
@@ -690,10 +692,7 @@ function Main() {
 
 function App() {
   return (
-    <>
-      <Header />
-      <Main />
-    </>
+    <Main />
   );
 }
 
