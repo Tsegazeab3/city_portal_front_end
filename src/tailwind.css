@@ -22,6 +22,38 @@
 
 }
 
+@keyframes card_title_in {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 100;
+  }
+}
+
+@keyframes card_text_in {
+  0% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 100;
+  }
+}
+
+.animate-card-title-coming-in {
+  animation: card_title_in 500ms ease-in-out 1 forwards;
+}
+
+.animate-card-text-coming-in {
+  animation: card_text_in 500ms ease-in-out 1 forwards;
+}
+
 .animate-picture-fade-in {
   animation: fade-in 2s ease-in 0s 1 forwards;
 }
