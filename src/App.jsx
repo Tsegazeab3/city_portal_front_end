@@ -7,10 +7,10 @@ import CardWithHoverDescription from './cardWithHover';
 import DropdownWithDescription from './DropdownWithDescription';
 import StatCard from './StatCard';
 import ServiceCards from './movingCards';
-import Footer from './Footer';
 import VisitCard from './VisitCard';
 import Charts from './Charts';
 import Header from './Header';
+import Footer from './Footer';
 import {
   LineChart,
   Line,
@@ -325,7 +325,7 @@ function Main() {
 
 function App() {
   return (
-    <NewsPage />
+    <Main />
   );
 }
 

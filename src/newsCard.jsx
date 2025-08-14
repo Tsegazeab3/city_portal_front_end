@@ -1,7 +1,7 @@
 import React from "react";
 const NewsCard = ({ title, text, image, alt, link }) => {
   return (
-    <article className="flex w-full h-100 flex-col flex-1 rounded-2xl bg-gray-100 shadow-lg">
+    <article className="flex w-full h-100 min-w-50 flex-col flex-1 rounded-2xl bg-gray-100 shadow-lg">
       <div className="flex-1 overflow-hidden">
         <img
           className="w-full h-full object-cover object-top rounded-t-2xl"
