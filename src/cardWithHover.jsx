@@ -4,7 +4,7 @@ const CardWithHoverDescription = ({ title1, title2, description, image, listItem
 
   return (
     <div
-      className="relative h-60 border border-black rounded-xl flex flex-col justify-end transition-transform duration-500 ease-in-out hover:scale-110 group"
+      className="flex-none col-span-1 relative h-60 w-full mr-2 border border-black rounded-xl flex flex-col justify-end transition-transform duration-500 ease-in-out hover:scale-110 group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -23,9 +23,9 @@ const CardWithHoverDescription = ({ title1, title2, description, image, listItem
         </div>
       ) : (
         <>
-          <h1 className="relative mt-4 text-black text-xl font-medium pl-6 underline top-3 hover:text-amber-150 animate-card-title-coming-in">{`${title1} ${title2}`}</h1>
-          <ul className="mt-4 p-4 md:p-8 list-inside list-disc text-sm animate-card-text-coming-in ease-in-out bg-[#535353] w-full h-full">
-            <p className="mt-4 text-white text-start text-sm ">{description}</p>
+          <h1 className="relative mt-4 text-black text-xl font-medium pl-3 underline top-3 hover:text-amber-150 animate-card-title-coming-in">{`${title1} ${title2}`}</h1>
+          <ul className="mt-4 md:p-8 list-inside list-disc text-sm animate-card-text-coming-in ease-in-out bg-[#535353] w-full h-50">
+            <p className="text-white text-start text-sm ">{description}</p>
             {listItems.map((item, index) => (
               <li className="text-white" key={index}>{item}</li>
             ))}

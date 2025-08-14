@@ -1,16 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import NewsCard from './newsCard';
+import React, { useState, useEffect, useRef, lazy, useId } from 'react';
+import ewsCard from './newsCard';
+import NewsPage from './newsPage';
+import { NewsHorizontal } from './news';
+
 import CardWithHoverDescription from './cardWithHover';
 import DropdownWithDescription from './DropdownWithDescription';
 import StatCard from './StatCard';
+import ServiceCards from './movingCards';
+import Footer from './Footer';
 import VisitCard from './VisitCard';
 import Charts from './Charts';
 import Header from './Header';
 import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -19,8 +22,6 @@ import {
   Legend
 } from 'recharts';
 
-{/* Card animation for services */ }
-// A custom hook to detect if an element is on screen using IntersectionObserver
 const useOnScreen = (options) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -113,6 +114,18 @@ const First_page = () => {
   const handleNext = () => {
     setCurrentIndex(prevIndex => (prevIndex + 1) % image_url_list.length);
   };
+  const handlebefore = () => {
+    setCurrentIndex(prevIndex => {
+      const lastIndex = image_url_list.length - 1;
+      if (prevIndex === 0) {
+        // If at the beginning, go to the last image.
+        return lastIndex;
+      } else {
+        // Otherwise, go to the previous image.
+        return prevIndex - 1;
+      }
+    })
+  };
 
   return (
     <div className="relative flex flex-col justify-center items-center px-4 md:px-16 w-screen h-screen snap-start">
@@ -131,7 +144,7 @@ const First_page = () => {
       </div>
 
       {/* Main content container with flexbox for responsive layout */}
-      <div className="flex flex-1 flex-col lg:flex-row justify-between items-center lg:items-center w-full max-w-7xl mx-auto z-10 px-4 md:px-8 pt-24 pb-32">
+      <div className="flex flex-1 flex-col lg:flex-row justify-between items-center lg:items-center w-full max-w-7xl mx-auto z-10 px-4 md:px-14 pt-24 pb-32">
         <div className="flex-shrink-0 mb-8 lg:mb-0">
           <WelcomeTitle />
         </div>
@@ -158,52 +171,18 @@ const First_page = () => {
           </svg>
         </button>
       </div>
-    </div>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white p-8">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">About Us</h3>
-            <p className="text-sm">
-              Dedicated to serving the citizens of Addis Ababa with timely information and reliable services.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Home</a></li>
-              <li><a href="#" className="hover:underline">Services</a></li>
-              <li><a href="#" className="hover:underline">News & Events</a></li>
-              <li><a href="#" className="hover:underline">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Contact</h3>
-            <ul className="space-y-2 text-sm">
-              <li>Address: Meskel Square, Addis Ababa</li>
-              <li>Phone: +251 11 123 4567</li>
-              <li>Email: info@addisababa.gov</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Facebook</a></li>
-              <li><a href="#" className="hover:underline">Twitter</a></li>
-              <li><a href="#" className="hover:underline">Instagram</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
-          &copy; 2024 Addis Ababa City Administration. All Rights Reserved.
-        </div>
+      <div className='absolute z-10 group transform rotate-180 bottom-auto top-auto left-8'>
+        <button
+          onClick={handlebefore}
+          className="active:-translate-y-2 p-3 bg-white/20 text-black rounded-full hover:shadow-lg hover:cursor-pointer hover:bg-white/75 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          aria-label="Next Card"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
-    </footer>
+    </div>
   );
 };
 
@@ -295,62 +274,15 @@ const UrbanInfrastructure = () => (
 );
 
 function Main() {
+
+
+
   const populationGrowthData = [
     { name: '2021', population: 5228000 },
     { name: '2022', population: 5461000 },
     { name: '2023', population: 5708000 },
     { name: '2024', population: 5957000 },
   ];
-
-  const propertyTaxServiceCard = {
-    title1: 'Property Tax',
-    title2: '& Assessment',
-    description: 'Addis Ababa property tax information, payment options, assessment records, and related legal documentation.',
-    image: '../src/assets/images/property_logo.png',
-    backImage: '../src/assets/images/anbesa_bus.jpg',
-    listItems: [
-      'Tax payment portal',
-      'Property assessment records',
-      'Legal amendments and updates',
-    ]
-  };
-  const publicTransportServiceCard = {
-    title1: 'Public',
-    title2: 'Transportation',
-    description: 'Access bus schedules, route maps, ticket information, and real time updates for all public transportation services',
-    image: '../src/assets/transportation_logo.png',
-    backImage: '../src/assets/images/anbesa_bus.jpg',
-    listItems: [
-      "Bus schedules and routes",
-      "Online ticket booking",
-      "Service updates and alerts"
-    ],
-  };
-
-  const latestAmendmentServiceCard = {
-    title1: 'Latest',
-    title2: 'Amendments',
-    description: 'Stay updated with the latest legal amendments, policy changes, and regulatory updates affecting city residents.',
-    image: '../src/assets/property_logo.png',
-    listItems: [
-      "Recent policy changes",
-      "Legal document updates",
-      "Regulatory announcements",
-    ],
-  };
-
-  const fireRescueServiceCard = {
-    title1: 'Fire &',
-    title2: 'Rescue Services',
-    description: 'Access fire department services, report hazardous conditions, and get emergency assistance information.',
-    image: '../src/assets/images/addis_ababa_fire_station_logo.png',
-    backImage: '../src/assets/images/fire_fighters.jpg',
-    listItems: [
-      "Dial 991 or 916",
-      "Text for assistance",
-    ],
-  }
-
   return (
     <main className="bg-[#f2f2f2]snap-y snap-mandatory h-screen overflow-x-hidden overflow-y-scroll">
       <First_page />
@@ -382,138 +314,19 @@ function Main() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-
-        </div>
-
-      </div>
-      <div className="h-auto snap-start w-screen p-4 md:p-8">
-        <div className="container mx-auto">
-          <h1 className="text-center my-4 md:my-8 text-2xl md:text-3xl">City Services & Information </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:p-40 lg:grid-cols-3 gap-4 md:gap-8 w-full mx-auto">
-            <CardWithHoverDescription
-              title1={publicTransportServiceCard.title1}
-              title2={publicTransportServiceCard.title2}
-              description={publicTransportServiceCard.description}
-              image={publicTransportServiceCard.image}
-              backImage={publicTransportServiceCard.backImage}
-              listItems={publicTransportServiceCard.listItems}
-            />
-            <CardWithHoverDescription
-              title1={propertyTaxServiceCard.title1}
-              title2={propertyTaxServiceCard.title2}
-              description={propertyTaxServiceCard.description}
-              image={propertyTaxServiceCard.image}
-              backImage={propertyTaxServiceCard.backImage}
-              listItems={propertyTaxServiceCard.listItems}
-            />
-            <CardWithHoverDescription
-              title1={latestAmendmentServiceCard.title1}
-              title2={latestAmendmentServiceCard.title2}
-              description={latestAmendmentServiceCard.description}
-              image={latestAmendmentServiceCard.image}
-              backImage={latestAmendmentServiceCard.backImage}
-              listItems={latestAmendmentServiceCard.listItems}
-            />
-            <CardWithHoverDescription
-              title1={fireRescueServiceCard.title1}
-              title2={fireRescueServiceCard.title2}
-              description={fireRescueServiceCard.description}
-              image={fireRescueServiceCard.image}
-              backImage={fireRescueServiceCard.backImage}
-              listItems={fireRescueServiceCard.listItems}
-            />
-          </div>
         </div>
       </div>
       <h1 className="text-center my-4 md:my-8 text-2xl md:text-3xl">Recent News</h1>
-      <div className="h-120 snap-start flex flex-col lg:flex-row gap-4 md:gap-8 mt-4 md:mt-10 p-4 md:p-8">
-        <article className="flex flex-col flex-1 rounded-2xl bg-gray-100 shadow-lg">
-          <div className="flex-1 overflow-hidden">
-            <img className="w-full h-full object-cover object-top rounded-t-2xl" src="../src/assets/news1.jpg" alt="UN Food Summit" />
-          </div>
-          <section className="flex-1 flex flex-col p-4 md:p-8">
-            <h1 className="text-center font-bold text-xl md:text-2xl">UN Food Summit</h1>
-            <p className="font-medium text-sm md:text-md mt-2">Ethiopia, with the help of Italy, will be hosting the upcoming UN food systems Summit. In connection with this conference, Prime Minister Abiy Ahmed (PhD) received and spoke to heads of institutions and leaders who arrived in Addis Ababa.<br />
-              The Prime Minister received and spoke to the Prime Minister of Italy, the President of Somalia, the UN Deputy Secretary-General, the Director-General of FAO, the President of IFAD, the UN Assistant Secretary-General, and the UNDP Regional Director for Africa.</p>
-            <a className="block underline min-w-20 mt-auto ml-auto" href="#">Read more</a>
-          </section>
-        </article>
-        <NewsCard
-          text={"Ethiopia, with the help of Italy, will be hosting the upcoming UN food systems Summit. In connection with this conference, Prime Minister Abiy Ahmed (PhD) received and spoke to heads of institutions and leaders who arrived in Addis Ababa.</br>The Prime Minister received and spoke to the Prime Minister of Italy, the President of Somalia, the UN Deputy Secretary-General, the Director-General of FAO, the President of IFAD, the UN Assistant Secretary-General, and the UNDP Regional Director for Africa."}
-          image={"../src/assets/news1.jpg"}
-        />
-        <article className="flex flex-col flex-1 relative rounded-2xl bg-gray-100 shadow-lg">
-          <div className="flex-1 overflow-hidden">
-            <img className="w-full h-full object-cover object-center rounded-t-2xl" src="../src/assets/news.jpg" alt="UN Food Summit" />
-          </div>
-          <section className="flex-1 flex flex-col p-4 md:p-8">
-            <h1 className="text-center font-bold text-xl md:text-2xl">UN Food Summit</h1>
-            <p className="font-medium text-sm md:text-md mt-2">Ethiopia, with the help of Italy, will be hosting the upcoming UN food systems Summit. In connection with this conference, Prime Minister Abiy Ahmed (PhD) received and spoke to heads of institutions and leaders who arrived in Addis Ababa.<br />
-              The Prime Minister received and spoke to the Prime Minister of Italy, the President of Somalia, the UN Deputy Secretary-Secretary, and the UNDP Regional Director for Africa.</p>
-            <a className="block underline min-w-20 mt-auto ml-auto" href="#">Read more</a>
-          </section>
-        </article>
-        <article className="flex flex-col flex-1 relative rounded-2xl bg-gray-100 shadow-lg">
-          <div className="flex-1 overflow-auto">
-            <img className="w-full h-full object-cover object-center rounded-t-2xl" src="../src/assets/news.jpg" alt="UN Food Summit" />
-          </div>
-          <section className="flex-1 flex flex-col p-4 md:p-8">
-            <h1 className="text-center font-bold text-xl md:text-2xl">UN Food Summit</h1>
-            <p className="font-medium text-sm md:text-md mt-2">Ethiopia, with the help of Italy, will be hosting the upcoming UN food systems Summit. In connection with this conference, Prime Minister Abiy Ahmed (PhD) received and spoke to heads of institutions and leaders who arrived in Addis Ababa.<br />
-              The Prime Minister received and spoke to the Prime Minister of Italy, the President of Somalia, the UN Deputy Secretary-Secretary, and the UNDP Regional Director for Africa.</p>
-            <a className="block underline min-w-20 mt-auto ml-auto" href="#">Read more</a>
-          </section>
-        </article>
-      </div>
-      <div className="min-h-100 snap-start p-4 md:p-8 flex flex-col items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 w-full">
-          <div className="p-4 md:p-8 rounded-2xl flex flex-col border border-black shadow-lg">
-            <img className='w-16 h-16 mb-4 md:mb-8' src="../src/assets/images/addisababa_police_logo.png" />
-            <h2 className="text-xl font-bold text-center">Public Safety & Emergency Services</h2>
-            <p className="text-sm md:text-md font-medium text-justify mt-2"> Report criminal activities and hazardous situations to local authorities through our secure reporting system. You can call them through:</p>
-            <ul className="list-disc list-inside text-sm mt-2">
-              <li>Dial 991 or 916</li>
-              <li>Text for assistance</li>
-            </ul>
-          </div>
-          <div className="p-4 md:p-8 rounded-2xl flex flex-col border border-black shadow-lg">
-            <img className='w-16 h-16 mb-4 md:mb-8' src="../src/assets/images/addis_ababa_fire_station_logo.png" />
-            <h2 className="text-xl font-bold text-center">Fire & Rescue Services</h2>
-            <p className="text-sm md:text-md font-medium text-start mt-2">Access fire department services, report hazardous conditions, and get emergency assistance information.</p>
-            <ul className="list-disc list-inside text-sm mt-2">
-              <li>Dial 991 or 916</li>
-              <li>Text for assistance</li>
-            </ul>
-          </div>
-          <div className="p-4 md:p-8 rounded-2xl flex flex-col border border-black shadow-lg">
-            <img className='w-16 h-16 mb-4 md:mb-8' src="../src/assets/images/traffic_bureau.png" />
-            <h2 className="text-xl font-bold text-center">Traffic & Road Incidents</h2>
-            <p className="text-sm md:text-md font-medium text-justify mt-2">Report traffic accidents, road hazards, and access real-time traffic incident updates and alerts.</p>
-            <ul className="list-disc list-inside text-sm mt-2">
-              <li>Dial 991 or 916</li>
-              <li>Text for assistance</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className="h-auto p-4 md:p-8">
-        <h1 className="text-center my-8 text-3xl">Community & Engagement</h1>
-        <CommunityEngagement />
-      </div>
-      <div className="h-auto p-4 md:p-8">
-        <h1 className="text-center my-8 text-3xl">Urban Infrastructure & Utilities</h1>
-        <UrbanInfrastructure />
-      </div>
+      <NewsHorizontal />
       <Footer />
-    </main >
+    </main>
   );
 }
 
 function App() {
   return (
-    <Main />
+    <NewsPage />
   );
 }
 
 export default App;
-

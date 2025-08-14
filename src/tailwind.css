@@ -1,5 +1,25 @@
 @import "tailwindcss";
+
 /**animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode> <play-state>;*/
+@keyframes translate_right {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes translate_left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-40px);
+  }
+}
 
 @keyframes fade_out {
   0% {
@@ -46,6 +66,15 @@
   }
 }
 
+/**animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode> <play-state>;*/
+.animate-card-moving-to-the-left {
+  animation: translate_left 500ms ease-in 1 both;
+}
+
+.animate-card-moving-to-the-right {
+  animation: translate_right 500ms ease-in 1 both;
+}
+
 .animate-card-title-coming-in {
   animation: card_title_in 500ms ease-in-out 1 forwards;
 }
@@ -59,7 +88,6 @@
 }
 
 .animate-picture-fade-out {
-  /**animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode> <play-state>;*/
   animation: fade_out 2s ease-in 0s 1 forwards;
 }
 
