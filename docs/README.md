@@ -2,34 +2,6 @@
 
 This documentation describes the configuration and setup of a **Vite + React** project with Tailwind CSS and ESLint, providing insights into each config and lock file. You will find detailed explanations of purpose, structure, and usage for each file, including diagrams and best practices.
 
----
-
-## deepdocs.yml
-
-This file is a config for the Deepdocs (documentation generator) tool. It controls where and how Deepdocs should generate or update documentation.
-
-### Purpose
-
-- Controls documentation output directory.
-- Manages inclusion/exclusion of files.
-- Provides a unique string for reinitialization.
-
-### Example Content
-
-```yaml
-target: 
-  - url: "docs/"
-    include: []
-reinit: "a-random-string"
-```
-
-### Description
-
-- **target.url**: Sets the documentation output directory to `docs/`.
-- **target.include**: An empty list means no specific extra files are included.
-- **reinit**: A string used for cache-busting or reinitialization.
-
----
 
 ## tailwind.config.js
 
@@ -349,12 +321,13 @@ This is the **npm package lockfile**.
 
 ```mermaid
 flowchart LR
-    A[Source Files (src/, index.html)] -->|Scanned by| B[Tailwind CLI]
-    B -->|Generates| C[style.css]
-    C -->|Bundled with| E[Vite Dev Server]
-    D[React Components] -->|Transpiled & Bundled| E
-    D -->|Linted| G[ESLint]
-    E --> F[Browser]
+    A["Source Files (src/, index.html)"] -->|Scanned by| B["Tailwind CLI"]
+    B -->|Generates| C["style.css"]
+    C -->|Bundled with| E["Vite Dev Server"]
+    D["React Components"] -->|Transpiled & Bundled| E
+    D -->|Linted| G["ESLint"]
+    E --> F["Browser"]
+
 
 ```
 
