@@ -349,12 +349,13 @@ This is the **npm package lockfile**.
 
 ```mermaid
 flowchart LR
-    A[Source Files (src/, index.html)] -->|Tailwind scans| B[Tailwind CLI]
+    A[Source Files (src/, index.html)] -->|Scanned by| B[Tailwind CLI]
     B -->|Generates| C[style.css]
-    C -->|Imported by| D[React Components]
-    D -->|Transpiled & Bundled| E[Vite Dev Server]
-    E --> F[Browser]
+    C -->|Bundled with| E[Vite Dev Server]
+    D[React Components] -->|Transpiled & Bundled| E
     D -->|Linted| G[ESLint]
+    E --> F[Browser]
+
 ```
 
 ---
